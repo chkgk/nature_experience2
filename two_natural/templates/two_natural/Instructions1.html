@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Rules
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        You will be a player in a game. Here are the rules. 
+    </p>
+    <p>
+        There is the player, a co-player, and a virtual urn that contains 100 balls, some red, some green. 
+    </p>
+
+    <p>
+        For each player, three factors together determine the payoff:
+        <ol>
+            <li>The draw of a ball from the urn,</li>
+            <li>the player's own action, and</li>
+            <li>their co-player’s action.</li>
+        </ol>
+    </p>
+    <p>
+        The player and the co-player take one of two actions, either <b>A</b> or <b>B</b>. The urn from which the ball is drawn contains 20 <b>red</b> balls and 80 <b>green</b> balls. The color of the draw and the other player's action are revealed at the end of the round.
+    </p>
+    <p>
+        If a <b>red</b> ball is drawn, the actions of the player and the co-player do not matter for the outcome.  The player receives nothing (US$ 0). The passive participant also "receives" nothing (US$ 0).
+    </p>
+    <p>
+        If a green ball is drawn, then the actions of the player and the co-player matter for the outcome. There are four possibilities:
+        <ul>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is A</b>: The player receives US$ 1. The passive participant also "receives" US$ 1.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is B</b>: The player receives US$ 1. The passive participant "receives" US$ 3.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is A</b>: The player receives US$ 3. The passive participant "receives" US$ 1.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is B</b>: The player receives nothing (US$ 0). The passive participant "receives" nothing (US$ 0).</li>
+        </ul>
+    </p>
+
+    <p>
+        The co-players’ action is programmed to be <b>A</b> in about 60 out of 100 cases and <b>B</b> in about 40 out of 100 cases.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

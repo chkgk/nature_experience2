@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Decision
+{% endblock %}
+
+{% block content %}
+
+    <div align="center">
+        <img src="{% static 'v3_shared/room_diagram_second_round.png' %}" height="150">
+    </div>
+    <p>
+        Welcome to the second round of the game, where you can earn money if this round is selected for payout.
+    </p>
+    <p>
+        You are matched with a computer, your co-player for this round. Your co-player will choose an action, A or B, and a ball, red or green, will be drawn.
+    </p>
+
+    {% if player.aa_treatment %}
+        <p>In this round, you choose your action, A or B.</p>
+    {% endif %}
+
+    {% formfield player.action2_b %}
+
+    {% next_button %}
+
+    {% include "two_natural/ShortInstructions.html" %}
+
+{% endblock %}

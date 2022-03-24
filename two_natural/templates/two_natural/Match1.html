@@ -1,0 +1,24 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block styles %}
+    <style>
+        .otree-timer {
+            display: none;
+        }
+    </style>
+{% endblock styles %}
+
+{% block content %}
+    <div align="center">
+                    <img src="{% static 'v3_shared/room_diagram_first_round.png' %}" height="150">
+                    <p>
+                        Please wait while we match your action to your co-player's action.
+                    </p>
+                
+                </div>
+{% endblock content %}

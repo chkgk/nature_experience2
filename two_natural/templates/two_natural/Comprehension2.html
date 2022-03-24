@@ -1,0 +1,119 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz (2/2)
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .correct {
+            color: #339966;
+        }
+        .incorrect {
+            color: #ff0000;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div align="center">
+        <img height="150" src="{% static 'v3_shared/room_diagram_quiz.png' %}">
+    </div>
+    
+    {{ form.c5_payoff_ab_red.label }}
+    {{ form.c5_payoff_ab_red }}
+
+    {% if page == 2 %}
+        {% if c5_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p class="incorrect">
+                Wrong! Please refer to the payoff reminder below and correct your answer.
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c6_payoff_ab_green.label }}
+    {{ form.c6_payoff_ab_green }}
+
+    {% if page == 2 %}
+        {% if c6_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p class="incorrect">
+                Wrong! Please refer to the payoff reminder below and correct your answer.
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c7_payoff_bb_green.label }}
+    {{ form.c7_payoff_bb_green }}
+
+    {% if page == 2 %}
+        {% if c7_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p class="incorrect">
+                   Wrong! Please refer to the payoff reminder below and correct your answer.
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c8_payoff_ba_green.label }}
+    {{ form.c8_payoff_ba_green }}
+
+    {% if page == 2 %}
+        {% if c8_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p class="incorrect">
+                Wrong! Please refer to the payoff reminder below and correct your answer.
+            </p>
+        {% endif %}
+    {% endif %}
+    {% next_button %}
+
+    <p>
+        <button type="button" class="btn btn-secondary" id="show_reminder_button">Show payoff reminder</button>
+    </p>
+
+    {% include "two_natural/ShortInstructions.html" %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript">
+        var page = {{ page|json }};
+        var c5_ok = {{ c5_ok|json }};
+        var c6_ok = {{ c6_ok|json }};
+        var c7_ok = {{ c7_ok|json }};
+        var c8_ok = {{ c8_ok|json }};
+
+        // if not all ok, relabel next button and show payoff helper
+        if (page == 1) {
+            $('#payoff_reminder').hide();
+            $('#show_reminder_button').show();
+            $(".otree-btn-next").html('check answers');
+        } else {
+            if (!(c5_ok && c6_ok && c7_ok && c8_ok)) {
+                $("#payoff_reminder").show();
+                $('#show_reminder_button').hide();
+                $(".otree-btn-next").html('check answers');
+            } else {
+                $('#payoff_reminder').hide();
+                $('#show_reminder_button').hide();
+            }
+        }
+
+        $("#show_reminder_button").click(function(e) {
+            $('#show_reminder_button').hide();
+            $('#payoff_reminder').show();
+        });
+    </script>
+{% endblock %}

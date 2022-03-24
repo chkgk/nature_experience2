@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Action Preference
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .center {
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% formfield player.prefers_b %}
+    {% next_button %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Questions
+{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static "global/bootstrap-slider.min.css" %}"/>
+    <link rel="stylesheet" href="{% static "global/agent.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div align="center">
+        <img src="{% static 'v3_shared/room_diagram_first_round.png' %}" height="150">
+        <p>
+            What is your gut feeling - did your co-player just choose:
+        </p>
+        <p>
+            <b>A</b> or <b>B</b>?
+        </p>
+    </div>
+
+    <table cellspacing="0" class="slider-layout" width="%">
+        <tr>
+            <td align="right" width="250">
+                A
+            </td>
+            <td align="center" width="410">
+                <input id="id_a_or_b_r1" name="a_or_b_r1" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+            </td>
+            <td align="left" width="250">
+               B
+            </td>
+        </tr>
+    </table>
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static "global/bootstrap-slider.min.js" %}"></script>
+    <script type="text/javascript">
+        $("#id_a_or_b_r1").slider();
+        $('.otree-btn-next').hide();
+        $('.slider-handle').hide();
+        $('.slider').on('mousedown', function (event) {
+            $(this).find('.slider-handle:not(.hide)').show();
+            $('.otree-btn-next').show();
+        });
+    </script>
+{% endblock %}

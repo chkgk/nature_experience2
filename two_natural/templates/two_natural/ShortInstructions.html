@@ -1,0 +1,29 @@
+{% load otree static %}
+
+<div class="card bg-light" id="payoff_reminder">
+    <div class="card-body">
+        <p>
+            Remember: Your payoff is jointly determined by:
+        </p>
+        <ul>
+            <li>whether a red or a green ball is drawn from an urn containing 20 red and 80 green balls,</li>
+            <li>whether your action is A or B, and</li>
+            <li>whether your co-player's action is A or B.</li>
+        </ul>
+
+        <p>
+            The co-players’ action is programmed to be <b>A</b> in about 60 out of 100 cases and <b>B</b> in about 40 out of 100 cases.
+        </p>
+        <p>
+            If a green ball is drawn, and:
+        <ul>
+            <li>your action is A, and your co-player chooses A: You receive US$ 1. The passive participant you are matched with receives US$ 1.</li>
+            <li>your action is A, and your co-player chooses B: You receive US$ 1. The passive participant you are matched with receives US$ 3.</li>
+            <li>your action is B, and your co-player chooses A: You receive US$ 3. The passive participant you are matched with receives US$ 1.</li>
+            <li>your action is B, and your co-player chooses B: You receive nothing (US$ 0). The passive participant you are matched with receives nothing (US$ 0).</li>
+        </ul>
+        <p>
+            If a red ball is drawn, you receive nothing (US$ 0). The passive participant you are matched with receive nothing (US$ 0).
+        </p>
+    </div>
+</div>

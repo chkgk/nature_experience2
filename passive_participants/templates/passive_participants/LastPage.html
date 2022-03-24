@@ -1,0 +1,46 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Completed
+{% endblock %}
+
+{% block styles %}
+    <style>
+        #code {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <p>
+        Thank you for your participation.
+    </p>
+
+    <p>
+        Your payment consists of the fixed reward of $0.50 and the payout from the game the other participant played.
+    </p>
+    <p>
+        In your case, round <b>{{ player.payment_round }}</b> was chosen for payout, where you received <b>{{ player.payoff }}</b>.<br>
+        In total, you receive: {{ player.participant.payoff_plus_participation_fee }}.
+    </p>
+
+    <p>
+        Please enter the following code on Amazon Mechanical Turk to get your payment: <span id="code">NoE2022</span>
+    </p>
+
+    <p>
+        If you have any questions regarding this study, please write an email to {{ experimenter_name }}:
+        <a href="mailto:{{ experimenter_email }}">{{ experimenter_email }}</a>.
+    </p>
+    {% next_button %}
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        $(".otree-btn-next").html('Finish Study');
+    </script>
+{% endblock %}

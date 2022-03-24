@@ -1,0 +1,33 @@
+.slider-track {
+    background: #ccc;
+}
+.slider-selection {
+    background: #ccc;
+}
+
+.slider-label-left {
+    font-size: 12px;
+    margin-right: 15px;
+}
+
+.slider-label-right {
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.slider-layout {
+    border-spacing: 0px 10px;
+    border-collapse: separate;
+}
+
+.slider-horizontal {
+	width: 400px !important;
+}
+
+.red {
+	color: #ff0000;
+}
+
+.green {
+	color: #00b200;
+}

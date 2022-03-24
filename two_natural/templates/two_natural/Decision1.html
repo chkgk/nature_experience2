@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    First Round
+{% endblock %}
+
+{% block content %}
+
+    <div align="center">
+        <img src="{% static 'v3_shared/room_diagram_first_round.png' %}" height="150">
+    </div>
+    <p>
+        Welcome to the first round of the game.
+    </p>
+    <p>
+        You are now a player in this game, where you can earn money if this round is selected for payout.
+    </p>
+    <p>
+        You are matched with a computer, your co-player for this round. Your co-player will choose an action, A or B, and a ball, red or green, will be drawn.
+    </p>
+
+    {% formfield player.action1_b %}
+
+    {% next_button %}
+
+    {% include "two_natural/ShortInstructions.html" %}
+
+{% endblock %}

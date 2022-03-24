@@ -1,0 +1,117 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Quiz (1/2)
+{% endblock %}
+
+{% block styles %}
+    <style type="text/css">
+        .correct {
+            color: #339966;
+        }
+        .incorrect {
+            color: #ff0000;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div align="center">
+        <img height="150" src="{% static 'v3_shared/room_diagram_quiz.png' %}">
+    </div>
+    <p>
+        Welcome to the quiz. <br>
+        Here you have the chance to check whether you have properly understood the rules of the game. Please answer the following questions.
+    </p>
+
+    {{ form.c1_coplayer.label }}
+    {{ form.c1_coplayer }}
+
+    {% if page == 2 %}
+        {% if c1_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p>
+                <span class="incorrect">Wrong! Please read this part of the instructions again and correct your answer:</span><br/>
+                <em>
+                    <p>
+                        First, you take a small quiz about the game.<br>
+                        Then you are matched with a co-player, which is a computer, and the first round of the game is played. <br>
+                        Thereafter, you are matched anew with a computer co-player and the second round of the game is played.<br>
+                        Finally, you are asked to fill out a short survey.
+                    </p>
+                </em>
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c2_partner.label }}
+    {{ form.c2_partner }}
+
+    {% if page == 2 %}
+        {% if c2_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p>
+                <span class="incorrect">Wrong! Please read this part of the instructions again and correct your answer:</span><br/>
+                <em>
+                    <p>
+                        The payment earned by your computer co-player goes to another human participant who is passive and not taking any active decision in the game.
+                    </p>
+                </em>
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c3_probabilities.label }}
+    {{ form.c3_probabilities }}
+
+    {% if page == 2 %}
+        {% if c3_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p>
+                <span class="incorrect">Wrong! Please read this part of the instructions again and correct your answer:</span><br/>
+                <em>
+                   The co-player's action is programmed to be A in about 60 out of 100 cases and B in about 40 out of 100 cases.
+                </em>
+            </p>
+        {% endif %}
+    {% endif %}
+    <hr/>
+
+    {{ form.c4_decision_importance.label }}
+    {{ form.c4_decision_importance }}
+
+    {% if page == 2 %}
+        {% if c4_ok %}
+            <p class="correct">Correct!</p>
+        {% else %}
+            <p><span class="incorrect">Wrong! Please read this part of the instructions again and correct your answer:</span><br/>
+            <em>
+                Note that only one of the two rounds will be selected for payment at random. As it is unknown which of the two rounds counts, it is important to pay equally close attention to both.
+            </em></p>
+        {% endif %}
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        var page = {{ page|json }};
+        var c1_ok = {{ c1_ok|json }};
+        var c2_ok = {{ c2_ok|json }};
+        var c3_ok = {{ c3_ok|json }};
+        var c4_ok = {{ c4_ok|json }};
+        
+        // if not all ok, relabel next button
+        if (!(c1_ok && c2_ok && c3_ok && c4_ok)) {
+            $(".otree-btn-next").html('check answers');
+        }
+    </script>
+{% endblock %}
