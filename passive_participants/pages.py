@@ -12,6 +12,11 @@ class Instructions1(Page):
         self.player.get_payment_data()
 
 
+class Survey(Page):
+    form_model = 'player'
+    form_fields = ['age', 'gender']
+
+
 class LastPage(Page):
     def vars_for_template(self):
         return {
@@ -20,4 +25,4 @@ class LastPage(Page):
         }
 
 
-page_sequence = [Introduction, Instructions1, LastPage]
+page_sequence = [Introduction, Instructions1, Survey, LastPage]

@@ -21,11 +21,11 @@
     </p>
 
     <p>
-        Your payment consists of the fixed reward of $0.50 and the payout from the game the other participant played.
+        Your payment consists of the fixed reward of $0.50 and the payout from round 1 or round 2 of the game that the matched active participant has played.
     </p>
     <p>
-        In your case, round <b>{{ player.payment_round }}</b> was chosen for payout, where you received <b>{{ player.payoff }}</b>.<br>
-        In total, you receive: {{ player.participant.payoff_plus_participation_fee }}.
+        Round <b>{{ player.payment_round }}</b> was randomly selected for payout, where the computer co-player earned <b>{{ player.payoff }}</b>.<br>
+        In total, you receive: <b>{{ player.participant.payoff_plus_participation_fee }}.</b>
     </p>
 
     <p>

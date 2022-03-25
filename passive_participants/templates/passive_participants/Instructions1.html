@@ -8,7 +8,7 @@
 {% block content %}
 
     <p>
-        You will be a player in a game. Here are the rules. 
+        The <b>active</b> participant is a player in a game. Here are the rules. 
     </p>
     <p>
         There is the player, a co-player, and a virtual urn that contains 100 balls, some red, some green. 
@@ -31,15 +31,24 @@
     <p>
         If a green ball is drawn, then the actions of the player and the co-player matter for the outcome. There are four possibilities:
         <ul>
-            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is A</b>: The player receives US$ 1. The passive participant also "receives" US$ 1.</li>
-            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is B</b>: The player receives US$ 1. The passive participant "receives" US$ 3.</li>
-            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is A</b>: The player receives US$ 3. The passive participant "receives" US$ 1.</li>
-            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is B</b>: The player receives nothing (US$ 0). The passive participant "receives" nothing (US$ 0).</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is A</b>:<br> 
+                The player receives US$ 1. The passive participant also receives US$ 1.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is A</b> and the <b>co-player’s action is B</b>:<br> 
+                The player receives US$ 1. The passive participant receives US$ 3.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is A</b>:<br> 
+                The player receives US$ 3. The passive participant receives US$ 1.</li>
+            <li>A <b>green</b> ball is drawn and the player’s <b>action is B</b> and the <b>co-player’s action is B</b>:<br> 
+                The player receives nothing (US$ 0). The passive participant also receives nothing (US$ 0).</li>
         </ul>
     </p>
 
     <p>
         The co-players’ action is programmed to be <b>A</b> in about 60 out of 100 cases and <b>B</b> in about 40 out of 100 cases.
+    </p>
+    
+    <p>
+        <b>You are the passive participant.</b><br>
+        The two rounds of the game have already been played and you have been matched with a random active participant. You will receive the payment from this game after filling out a short survey. 
     </p>
 
     {% next_button %}

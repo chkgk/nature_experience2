@@ -53,4 +53,17 @@ class Player(BasePlayer):
         self.payment_round = payment_round
         self.payoff = payment
 
+        # survey
 
+    age = models.IntegerField(
+        verbose_name='What is your age?',
+        min=18, max=99,
+        doc="Participant's age"
+    )
+
+    gender = models.StringField(
+        choices=['Male', 'Female', 'Other', 'I prefer not to tell'],
+        verbose_name='What is your gender?',
+        widget=widgets.RadioSelect,
+        doc="Participant's gender"
+    )

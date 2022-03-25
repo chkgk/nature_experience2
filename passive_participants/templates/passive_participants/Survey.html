@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Survey
+{% endblock %}
+
+{% block content %}
+    <div align="center">
+        <img height="150" src="{% static 'v3_shared/room_diagram_survey.png' %}">
+    </div>
+    <p>
+        Welcome to the survey. We ask you to answer a few questions before you complete the experiment.
+    </p>
+    {% for field in form %}
+        {% formfield field %}
+    {% endfor %}
+
+    {% next_button %}
+
+{% endblock %}
