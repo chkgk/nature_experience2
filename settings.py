@@ -44,6 +44,7 @@ SESSION_CONFIG_DEFAULTS = {
                 'QualificationTypeId': '3KOC1385AO2HOJ2HF551PYPM8EABYP',
                 'Comparator': 'DoesNotExist'
             },
+            # NoE 2022
             {
                 'QualificationTypeId': '3KOC1385AO2HOJ2HF551PYPM8FRBY8',
                 'Comparator': 'DoesNotExist'
