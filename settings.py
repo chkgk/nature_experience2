@@ -3,14 +3,14 @@ from os import environ
 SESSION_CONFIGS = [
     {
         'name': 'v3_bot_ra',
-        'display_name': "Bot - RA treatment",
+        'display_name': "Bot - Active",
         'num_demo_participants': 2,
         'app_sequence': ['two_natural'],
         'treatment': 'RA'
     },
     {
         'name': 'v3_bot_payments',
-        'display_name': "Payments to Passive",
+        'display_name': "Bot - Passive",
         'num_demo_participants': 2,
         'app_sequence': ['passive_participants'],
     }
