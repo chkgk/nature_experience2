@@ -229,7 +229,7 @@ page_sequence = [
     Decision2,
     Belief_color2,
     Belief_other2,
-    Motivation,
+    # Motivation,
     Match2,
     Results2,
     Survey,
