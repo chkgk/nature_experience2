@@ -277,3 +277,27 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal(),
         doc="SOEP Risk question, scale 0 (lowest) to 10 (highest) propensity to take risk."
     )
+
+
+def custom_export(players):
+    # header row
+    # yield ['idn', 'payment_round', 'payment']
+    counter = 0
+    for p in players:
+        if not p.participant.visited or p.participant._index_in_pages < p.participant._max_page_index:
+            continue
+        counter += 1
+        if p.payment_room_1:
+            payment_round = 1
+            if p.ball_green_r1:
+                payment_passive = cu(C.PAYOFF_MATRIX[p.other_b_r1][p.action1_b])
+            else:
+                payment_passive = cu(0)
+        else:
+            payment_round = 2
+            if p.ball_green_r2:
+                payment_passive = cu(C.PAYOFF_MATRIX[p.other_b_r2][p.action2_b])
+            else:
+                payment_passive = cu(0)
+        payment_passive = int(payment_passive)
+        yield [counter, payment_round, payment_passive, p.session.code, p.participant.code]
