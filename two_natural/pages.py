@@ -9,74 +9,30 @@ class Instructions1(Page):
     pass
 
 class Comprehension1(Page):
-    template_name = "two_natural/Comprehension1.html"
     form_model = "player"
     form_fields = ["c1_coplayer", "c2_partner", "c3_probabilities", "c4_decision_importance"]
 
     def vars_for_template(self):
         return {
-            'page': 1,
-            'c1_ok': False,
-            'c2_ok': False,
-            'c3_ok': False,
-            'c4_ok': False,
+            'c1_solution': C.COMPREHENSION_SOLUTIONS['c1_coplayer'],
+            'c2_solution': C.COMPREHENSION_SOLUTIONS['c2_partner'],
+            'c3_solution': C.COMPREHENSION_SOLUTIONS['c3_probabilities'],
+            'c4_solution': C.COMPREHENSION_SOLUTIONS['c4_decision_importance'],
         }
 
-class Comprehension1_check(Page):
-    template_name = "two_natural/Comprehension1.html"
-    form_model = "player"
-    form_fields = ["c1_coplayer", "c2_partner", "c3_probabilities", "c4_decision_importance"]
-
-    def vars_for_template(self):
-        return {
-            'page': 2,
-            'c1_ok': self.player.c1_coplayer == C.COMPREHENSION_SOLUTIONS["c1_coplayer"],
-            'c2_ok': self.player.c2_partner == C.COMPREHENSION_SOLUTIONS["c2_partner"],
-            'c3_ok': self.player.c3_probabilities == C.COMPREHENSION_SOLUTIONS["c3_probabilities"],
-            'c4_ok': self.player.c4_decision_importance == C.COMPREHENSION_SOLUTIONS["c4_decision_importance"],
-        }
-
-    def error_message(self, values):
-        if values["c1_coplayer"] != C.COMPREHENSION_SOLUTIONS["c1_coplayer"] or \
-                values["c2_partner"] != C.COMPREHENSION_SOLUTIONS["c2_partner"] or \
-                values["c3_probabilities"] != C.COMPREHENSION_SOLUTIONS["c3_probabilities"] or \
-                values["c4_decision_importance"] != C.COMPREHENSION_SOLUTIONS["c4_decision_importance"]:
-            return "Please check your answers again!"
 
 class Comprehension2(Page):
-    template_name = "two_natural/Comprehension2.html"
     form_model = "player"
     form_fields = ["c5_payoff_ab_red", "c6_payoff_ab_green", "c7_payoff_bb_green", "c8_payoff_ba_green"]
 
     def vars_for_template(self):
         return {
-            'page': 1,
-            'c5_ok': False,
-            'c6_ok': False,
-            'c7_ok': False,
-            'c8_ok': False,
+            'c5_solution': C.COMPREHENSION_SOLUTIONS["c5_payoff_ab_red"],
+            'c6_solution': C.COMPREHENSION_SOLUTIONS["c6_payoff_ab_green"],
+            'c7_solution':C.COMPREHENSION_SOLUTIONS["c7_payoff_bb_green"],
+            'c8_solution': C.COMPREHENSION_SOLUTIONS["c8_payoff_ba_green"],
         }
 
-class Comprehension2_check(Page):
-    template_name = "two_natural/Comprehension2.html"
-    form_model = "player"
-    form_fields = ["c5_payoff_ab_red", "c6_payoff_ab_green", "c7_payoff_bb_green", "c8_payoff_ba_green"]
-
-    def vars_for_template(self):
-        return {
-            'page': 2,
-            'c5_ok': self.player.c5_payoff_ab_red == C.COMPREHENSION_SOLUTIONS["c5_payoff_ab_red"],
-            'c6_ok': self.player.c6_payoff_ab_green == C.COMPREHENSION_SOLUTIONS["c6_payoff_ab_green"],
-            'c7_ok': self.player.c7_payoff_bb_green == C.COMPREHENSION_SOLUTIONS["c7_payoff_bb_green"],
-            'c8_ok': self.player.c8_payoff_ba_green == C.COMPREHENSION_SOLUTIONS["c8_payoff_ba_green"],
-        }
-
-    def error_message(self, values):
-        if values["c5_payoff_ab_red"] != C.COMPREHENSION_SOLUTIONS["c5_payoff_ab_red"] or \
-           values["c6_payoff_ab_green"] != C.COMPREHENSION_SOLUTIONS["c6_payoff_ab_green"] or \
-           values["c7_payoff_bb_green"] != C.COMPREHENSION_SOLUTIONS["c7_payoff_bb_green"] or \
-           values["c8_payoff_ba_green"] != C.COMPREHENSION_SOLUTIONS["c8_payoff_ba_green"]:
-            return "Please check your answers again!"
 
 class ActionPreference(Page):
     def is_displayed(self):
@@ -149,19 +105,6 @@ class Belief_other2(Page):
     form_model = 'player'
     form_fields = ['a_or_b_r2']
 
-class Motivation(Page):
-    form_model = 'player'
-    form_fields = ['motivation', 'motivation_other']
-
-    def vars_for_template(self):
-        return {
-            'first_round_action': 'B' if self.player.action1_b else 'A',
-            'current_action': 'B' if self.player.action2_b else 'A',
-        }
-
-    def error_message(self, values):
-        if values["motivation"] == 6 and (values["motivation_other"] is None or values["motivation_other"].strip() == ""):
-            return "Please specify your motivation."
 
 class Match2(Page):
     timeout_seconds = C.MIN_WAIT
@@ -215,9 +158,7 @@ page_sequence = [
     Introduction,
     Instructions1,
     Comprehension1,
-    Comprehension1_check,
     Comprehension2,
-    Comprehension2_check,
     ActionPreference,
     DecisionInfo,
     DecisionAssignment,
@@ -229,7 +170,6 @@ page_sequence = [
     Decision2,
     Belief_color2,
     Belief_other2,
-    # Motivation,
     Match2,
     Results2,
     Survey,

@@ -22,66 +22,63 @@
         <img height="150" src="{% static 'v3_shared/room_diagram_quiz.png' %}">
     </div>
     
-    {{ form.c5_payoff_ab_red.label }}
-    {{ form.c5_payoff_ab_red }}
+    {{ form.c5_payoff_ab_red.label }}<br>
+    {% for f in form.c5_payoff_ab_red %}
+        <div class="form-check">{{ f }} <label for="c5_payoff_ab_red-{{ forloop.counter0 }}">{% if f.label.text == '' %}{{ group.max_pay }}{% else %}{{ f.label.text }}.00{% endif %}</label></div>
+    {% endfor %}
 
-    {% if page == 2 %}
-        {% if c5_ok %}
-            <p class="correct">Correct!</p>
-        {% else %}
-            <p class="incorrect">
-                Wrong! Please refer to the payoff reminder below and correct your answer.
-            </p>
-        {% endif %}
-    {% endif %}
+    
+    <p class="correct" id="c5_correct">Correct!</p>
+    <p class="incorrect" id="c5_error">
+        Wrong! Please refer to the payoff reminder below and correct your answer.
+    </p>
+
     <hr/>
+    {{ form.c6_payoff_ab_green.label }} <br>
+    {% for f in form.c6_payoff_ab_green %}
+        <div class="form-check">{{ f }} <label for="c6_payoff_ab_green-{{ forloop.counter0 }}">{% if f.label.text == '' %}{{ group.max_pay }}{% else %}{{ f.label.text }}.00{% endif %}</label></div>
+    {% endfor %}
 
-    {{ form.c6_payoff_ab_green.label }}
-    {{ form.c6_payoff_ab_green }}
+    
+    <p class="correct" id="c6_correct">Correct!</p>
 
-    {% if page == 2 %}
-        {% if c6_ok %}
-            <p class="correct">Correct!</p>
-        {% else %}
-            <p class="incorrect">
-                Wrong! Please refer to the payoff reminder below and correct your answer.
-            </p>
-        {% endif %}
-    {% endif %}
+    <p class="incorrect" id="c6_error">
+        Wrong! Please refer to the payoff reminder below and correct your answer.
+    </p>
+
     <hr/>
+    {{ form.c7_payoff_bb_green.label }} <br>
+    {% for f in form.c7_payoff_bb_green %}
+        <div class="form-check">{{ f }} <label for="c7_payoff_bb_green-{{ forloop.counter0 }}">{% if f.label.text == '' %}{{ group.max_pay }}{% else %}{{ f.label.text }}.00{% endif %}</label></div>
+    {% endfor %}
 
-    {{ form.c7_payoff_bb_green.label }}
-    {{ form.c7_payoff_bb_green }}
+    
+    <p class="correct" id="c7_correct">Correct!</p>
 
-    {% if page == 2 %}
-        {% if c7_ok %}
-            <p class="correct">Correct!</p>
-        {% else %}
-            <p class="incorrect">
-                   Wrong! Please refer to the payoff reminder below and correct your answer.
-            </p>
-        {% endif %}
-    {% endif %}
+    <p class="incorrect" id="c7_error">
+           Wrong! Please refer to the payoff reminder below and correct your answer.
+    </p>
+
     <hr/>
+    {{ form.c8_payoff_ba_green.label }} <br>
+    {% for f in form.c8_payoff_ba_green %}
+        <div class="form-check">{{ f }} <label for="c8_payoff_ba_green-{{ forloop.counter0 }}">{% if f.label.text == '' %}{{ group.max_pay }}{% else %}{{ f.label.text }}.00{% endif %}</label></div>
+    {% endfor %}
+    
+    <p class="correct" id="c8_correct">Correct!</p>
 
-    {{ form.c8_payoff_ba_green.label }}
-    {{ form.c8_payoff_ba_green }}
-
-    {% if page == 2 %}
-        {% if c8_ok %}
-            <p class="correct">Correct!</p>
-        {% else %}
-            <p class="incorrect">
-                Wrong! Please refer to the payoff reminder below and correct your answer.
-            </p>
-        {% endif %}
-    {% endif %}
+    <p class="incorrect" id="c8_error">
+           Wrong! Please refer to the payoff reminder below and correct your answer.
+    </p>
+    <p>
+        <button type="button" class="btn btn-primary" id="check_answers_button">Check answers</button>
+    </p>
     {% next_button %}
 
     <p>
         <button type="button" class="btn btn-secondary" id="show_reminder_button">Show payoff reminder</button>
     </p>
-
+    
     {% include "two_natural/ShortInstructions.html" %}
 
 {% endblock %}
@@ -89,28 +86,69 @@
 
 {% block scripts %}
     <script type="text/javascript">
-        var page = {{ page|json }};
-        var c5_ok = {{ c5_ok|json }};
-        var c6_ok = {{ c6_ok|json }};
-        var c7_ok = {{ c7_ok|json }};
-        var c8_ok = {{ c8_ok|json }};
 
-        // if not all ok, relabel next button and show payoff helper
-        if (page == 1) {
-            $('#payoff_reminder').hide();
-            $('#show_reminder_button').show();
-            $(".otree-btn-next").html('check answers');
-        } else {
-            if (!(c5_ok && c6_ok && c7_ok && c8_ok)) {
-                $("#payoff_reminder").show();
-                $('#show_reminder_button').hide();
-                $(".otree-btn-next").html('check answers');
+        $('#payoff_reminder').hide();
+        $('#show_reminder_button').show();
+        $(".otree-btn-next").hide();
+        
+        let c5_solution = {{ c5_solution|json }};
+        let c6_solution = {{ c6_solution|json }};
+        let c7_solution = {{ c7_solution|json }};
+        let c8_solution = {{ c8_solution|json }};
+        
+        $('#c5_error').hide();
+        $('#c5_correct').hide();
+        $('#c6_error').hide();
+        $('#c6_correct').hide();
+        $('#c7_error').hide();
+        $('#c7_correct').hide();
+        $('#c8_error').hide();
+        $('#c8_correct').hide();
+
+        $("#check_answers_button").click(function(e) {
+            let c5 = $("input:radio[name='c5_payoff_ab_red']:checked").val();
+            let c6 = $("input:radio[name='c6_payoff_ab_green']:checked").val();
+            let c7 = $("input:radio[name='c7_payoff_bb_green']:checked").val();
+            let c8 = $("input:radio[name='c8_payoff_ba_green']:checked").val();
+            
+            if (c5 != c5_solution) {
+                $('#c5_error').show();
+                $('#c5_correct').hide();
             } else {
-                $('#payoff_reminder').hide();
-                $('#show_reminder_button').hide();
+                $('#c5_error').hide();
+                $('#c5_correct').show();
             }
-        }
-
+            
+            if (c6 != c6_solution) {
+                $('#c6_error').show();
+                $('#c6_correct').hide();
+            } else {
+                $('#c6_error').hide();
+                $('#c6_correct').show();
+            }
+            
+            if (c7 != c7_solution) {
+                $('#c7_error').show();
+                $('#c7_correct').hide();
+            } else {
+                $('#c7_error').hide();
+                $('#c7_correct').show();
+            }
+            
+            if (c8 != c8_solution) {
+                $('#c8_error').show();
+                $('#c8_correct').hide();
+            } else {
+                $('#c8_error').hide();
+                $('#c8_correct').show();
+            }
+            
+            if (c5 == c5_solution & c6 == c6_solution & c7 == c7_solution & c8 == c8_solution) {
+                $('#check_answers_button').hide();
+                $('.otree-btn-next').show();
+            }
+        });
+        
         $("#show_reminder_button").click(function(e) {
             $('#show_reminder_button').hide();
             $('#payoff_reminder').show();
