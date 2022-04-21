@@ -142,13 +142,6 @@ class Player(BasePlayer):
         doc="Answer to comprehension question 8 (payoff BA, green)",
         widget=widgets.RadioSelect)
 
-    prefers_b = models.BooleanField(
-        choices=[(False, 'Action A'), (True, 'Action B')],
-        verbose_name="A final question, for which there is no right or wrong answer: Which action would you choose?",
-        blank=True,
-        doc="Preferred action, AA treatment only.",
-        widget=widgets.RadioSelect)
-
     action1_b = models.BooleanField(
         choices=[(False, "A"), (True, "B")],
         widget=widgets.RadioSelect(),
@@ -174,11 +167,6 @@ class Player(BasePlayer):
     # beliefs
     green_red_r2 = models.IntegerField(min=0, max=100, doc="Round 1, Belief about ball being red (0) or green (100).")
     a_or_b_r2 = models.IntegerField(min=0, max=100, doc="Round 1, Belief about others' action being A (0) or B (100)")
-
-    # motivations for action choice in secound round
-    motivation = models.IntegerField(min=1, max=6,
-                                     doc="Motivation selected for switching, respectively sticking to the same action.")
-    motivation_other = models.CharField(blank=True, doc="Free text input for other motivations if motivation == 6")
 
     def determine_switch(self):
         self.switcher = self.action1_b != self.action2_b
@@ -281,7 +269,7 @@ class Player(BasePlayer):
 
 def custom_export(players):
     # header row
-    # yield ['idn', 'payment_round', 'payment']
+    yield ['idn', 'payment_round', 'payment', 'session', 'participant']
     counter = 0
     for p in players:
         if not p.participant.visited or p.participant._index_in_pages < p.participant._max_page_index:

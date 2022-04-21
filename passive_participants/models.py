@@ -9,7 +9,7 @@ from otree.api import (
     currency_range,
 )
 import itertools
-
+import csv
 
 
 doc = """
@@ -31,10 +31,12 @@ class C(BaseConstants):
 class Subsession(BaseSubsession):
     def creating_session(self):
         payment_data = []
-        with open(C.PAYMENT_FILE, 'r') as f:
-            for line in f:
-                idn, payment_round, payment = line.strip().split(',')
-                payment_data.append((int(idn), int(payment_round), int(payment)))
+        with open(C.PAYMENT_FILE, 'r', encoding='utf-8-sig') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                # print(row)
+                # idn, payment_round, payment, s, p = line.strip().split(',')
+                payment_data.append((int(row['idn']), int(row['payment_round']), int(row['payment'])))
 
         self.session.vars['payments'] = itertools.cycle(payment_data)  # this should never reach the end, but we cycle just in case
 
@@ -57,7 +59,7 @@ class Player(BasePlayer):
 
     age = models.IntegerField(
         verbose_name='What is your age?',
-        min=18, max=99,
+        min=16, max=99,
         doc="Participant's age"
     )
 
