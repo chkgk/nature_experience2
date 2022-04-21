@@ -27,12 +27,12 @@ SESSION_CONFIG_DEFAULTS = {
     'doc': "",
     'mturk_hit_settings': dict(
         keywords='bonus, study, research, decision making',
-        title='Short Research Study (ca. 7min)',
+        title='Short Research Study (ca. 5min)',
         description='Participate in a game and a short survey.',
         frame_height=700,
         template='two_natural/mturk_template.html',
         minutes_allotted_per_assignment=15,
-        expiration_hours=3,
+        expiration_hours=5,
         qualification_requirements=[
             {
                 'QualificationTypeId': '00000000000000000071',
